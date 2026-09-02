@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATELIER MUZE — Quiet Luxury, Effortless Grace</title>
+<meta name="description" content="ATELIER MUZE — 高智感与松弛感并存的女性高级休闲服装品牌。重磅真丝、精纺羊毛、阿尔巴斯山羊绒，为每一日的从容而造。">
+
+<!-- ===== 字体：Lora 衬线（标题）+ Inter 无衬线（正文） ===== -->
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap">
+
+<style>
+/* ============================================================
+   ATELIER MUZE — Design Tokens
+   ============================================================ */
+:root {
+  --bg-cream:        #FDFBF7;
+  --text-charcoal:   #2E2A28;
+  --accent-oat:      #E5DFD5;
+  --text-muted:      #8A847E;
+  --line-soft:       rgba(46, 42, 40, 0.12);
+
+  --font-display: 'Lora', 'Georgia', 'Times New Roman', serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-lux:  0.8s;
+
+  --nav-height: 72px;
+  --section-pad: clamp(64px, 10vw, 140px);
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-cream);
+  color: var(--text-charcoal);
+  line-height: 1.6;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+::selection { background: var(--accent-oat); color: var(--text-charcoal); }
+
+/* ============================================================
+   Navigation — 毛玻璃顶栏
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(24px, 5vw, 64px);
+  background: rgba(253, 251, 247, 0.72);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--line-soft);
+  transition: background var(--dur-lux) var(--ease-lux);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nav__logo span { font-style: italic; font-weight: 400; }
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 44px);
+  list-style: none;
+}
+
+.nav__link {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 4px 0;
+  transition: color var(--dur-lux) var(--ease-lux);
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--text-charcoal);
+  transition: width var(--dur-lux) var(--ease-lux);
+}
+
+.nav__link:hover::after { width: 100%; }
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+
+.nav__toggle span {
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--text-charcoal);
+  transition: transform var(--dur-lux) var(--ease-lux), opacity 0.3s ease;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--nav-height) + 40px) clamp(24px, 6vw, 80px) 80px;
+  position: relative;
+}
+
+.hero__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s var(--ease-lux) 0.2s forwards;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 14ch;
+  margin-bottom: 36px;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: fadeUp 1.2s var(--ease-lux) 0.4s forwards;
+}
+
+.hero__title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.hero__desc {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 46ch;
+  margin-bottom: 52px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s var(--ease-lux) 0.65s forwards;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border: 1px solid var(--text-charcoal);
+  border-radius: 0;
+  transition: all var(--dur-lux) var(--ease-lux);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s var(--ease-lux) 0.85s forwards;
+}
+
+.hero__cta:hover {
+  background: var(--text-charcoal);
+  color: var(--bg-cream);
+}
+
+.hero__cta svg {
+  width: 16px; height: 16px;
+  transition: transform var(--dur-lux) var(--ease-lux);
+}
+
+.hero__cta:hover svg { transform: translateX(4px); }
+
+.hero__scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-lux) 1.2s forwards;
+}
+
+.hero__scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero__scroll-line {
+  width: 1px; height: 40px;
+  background: var(--line-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%; left: 0;
+  width: 100%; height: 100%;
+  background: var(--text-charcoal);
+  animation: scrollLine 2s var(--ease-lux) infinite;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollLine {
+  0%   { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ============================================================
+   Section Shared
+   ============================================================ */
+.section {
+  padding: var(--section-pad) clamp(24px, 6vw, 80px);
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: clamp(48px, 7vw, 96px);
+}
+
+.section__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.section__title em { font-style: italic; color: var(--text-muted); }
+
+/* ============================================================
+   Essentials Collection — 三列不规则卡片网格
+   ============================================================ */
+.collection {
+  background: var(--bg-cream);
+}
+
+.collection__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 中间卡片向下错落，制造节奏感 */
+.collection__card:nth-child(2) {
+  margin-top: clamp(40px, 6vw, 80px);
+}
+
+/* 变体：两侧卡片向下错落，与默认模式交替形成页面节奏 */
+.collection__grid--alt .collection__card:nth-child(2) {
+  margin-top: 0;
+}
+.collection__grid--alt .collection__card:nth-child(1),
+.collection__grid--alt .collection__card:nth-child(3) {
+  margin-top: clamp(40px, 6vw, 80px);
+}
+
+/* 燕麦色底的系列板块 */
+.collection--oat {
+  background: var(--accent-oat);
+}
+
+/* 4款商品时，最后一款居中显示 */
+.collection__grid--four .collection__card:last-child {
+  grid-column: 2 / 3;
+}
+
+/* 5款商品时，最后两款在第二行居中排列 */
+.collection__grid--five .collection__card:nth-child(4) {
+  grid-column: 1 / 2;
+  justify-self: end;
+  width: 100%;
+  max-width: 100%;
+}
+.collection__grid--five .collection__card:nth-child(5) {
+  grid-column: 2 / 3;
+  justify-self: start;
+  width: 100%;
+  max-width: 100%;
+}
+
+.product-card {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--accent-oat);
+  aspect-ratio: 4 / 5;
+  margin-bottom: 24px;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-lux) var(--ease-lux);
+  will-change: transform;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.03);
+}
+
+.product-card__tag {
+  position: absolute;
+  top: 20px; left: 20px;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-charcoal);
+  background: rgba(253, 251, 247, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 8px 16px;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all var(--dur-lux) var(--ease-lux);
+}
+
+.product-card:hover .product-card__tag {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card__info {
+  padding: 0 4px;
+  transition: transform var(--dur-lux) var(--ease-lux);
+}
+
+.product-card:hover .product-card__info {
+  transform: translateY(-6px);
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+
+.product-card__desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* 悬停显现的极简下划线按钮 */
+.product-card__discover {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all var(--dur-lux) var(--ease-lux);
+}
+
+.product-card:hover .product-card__discover {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card__discover::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--text-charcoal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-lux) var(--ease-lux) 0.1s;
+}
+
+.product-card:hover .product-card__discover::after {
+  transform: scaleX(1);
+}
+
+.product-card__discover svg {
+  width: 14px; height: 14px;
+  transition: transform var(--dur-lux) var(--ease-lux);
+}
+
+.product-card:hover .product-card__discover svg {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   Philosophy — 品牌理念
+   ============================================================ */
+.philosophy {
+  background: var(--accent-oat);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+  max-width: none;
+}
+
+.philosophy__content {
+  padding: 0 clamp(24px, 4vw, 60px);
+}
+
+.philosophy__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.philosophy__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+.philosophy__title em { font-style: italic; color: var(--text-muted); }
+
+.philosophy__text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-charcoal);
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.philosophy__image-wrap {
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.philosophy__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer {
+  padding: clamp(60px, 8vw, 100px) clamp(24px, 6vw, 80px) 40px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  max-width: 1400px;
+  margin: 0 auto 60px;
+}
+
+.footer__brand-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.footer__brand-name span { font-style: italic; font-weight: 400; }
+
+.footer__brand-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 32ch;
+}
+
+.footer__col-title {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: var(--text-charcoal);
+}
+
+.footer__links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer__link {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  transition: color var(--dur-lux) var(--ease-lux);
+}
+
+.footer__link:hover { color: var(--text-charcoal); }
+
+.footer__bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.footer__social {
+  display: flex;
+  gap: 24px;
+}
+
+.footer__social-link {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--dur-lux) var(--ease-lux);
+}
+
+.footer__social-link:hover { color: var(--text-charcoal); }
+
+/* ============================================================
+   Scroll Reveal — 滚动渐入
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 1s var(--ease-lux), transform 1s var(--ease-lux);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Responsive — 移动端单列流式布局
+   ============================================================ */
+@media (max-width: 900px) {
+  .collection__grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .collection__card:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .collection__grid--alt .collection__card:nth-child(1),
+  .collection__grid--alt .collection__card:nth-child(3) {
+    margin-top: 0;
+  }
+
+  .collection__grid--four .collection__card:last-child {
+    grid-column: auto;
+  }
+
+  .collection__grid--five .collection__card:nth-child(4),
+  .collection__grid--five .collection__card:nth-child(5) {
+    grid-column: auto;
+    justify-self: auto;
+  }
+
+  .philosophy {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophy__image-wrap {
+    min-height: 360px;
+    order: -1;
+  }
+
+  .philosophy__content {
+    padding: 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  :root { --nav-height: 60px; }
+
+  .nav__links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0; right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: rgba(253, 251, 247, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 20px clamp(24px, 6vw, 40px);
+    border-bottom: 1px solid var(--line-soft);
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: transform var(--dur-lux) var(--ease-lux), opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .nav__links.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__links li {
+    width: 100%;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .nav__links li:last-child { border-bottom: none; }
+
+  .nav__link {
+    display: block;
+    padding: 16px 0;
+    font-size: 0.85rem;
+  }
+
+  .nav__link::after { display: none; }
+
+  .nav__toggle { display: flex; }
+
+  .nav__toggle.is-active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .nav__toggle.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav__toggle.is-active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* 尊重减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     Navigation — 毛玻璃导航栏
+     ============================================================ -->
+<nav class="nav" role="navigation" aria-label="主导航">
+  <a href="#" class="nav__logo">Atelier <span>Muze</span></a>
+
+  <ul class="nav__links" id="navLinks">
+    <li><a href="#collection" class="nav__link">Collection</a></li>
+    <li><a href="#apparel" class="nav__link">Apparel</a></li>
+    <li><a href="#bags" class="nav__link">Bags</a></li>
+    <li><a href="#shoes" class="nav__link">Shoes</a></li>
+    <li><a href="#accessories" class="nav__link">Accessories</a></li>
+    <li><a href="#jewelry" class="nav__link">Jewelry</a></li>
+    <li><a href="#philosophy" class="nav__link">Atelier</a></li>
+  </ul>
+
+  <button class="nav__toggle" id="navToggle" aria-label="切换菜单" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     Hero
+     ============================================================ -->
+<header class="hero">
+  <p class="hero__eyebrow">Autumn / Winter 2026</p>
+  <h1 class="hero__title">The Art of <em>Effortless</em> Elegance</h1>
+  <p class="hero__desc">
+    为懂得生活的女性而造。每一针每一线，都在松弛与精致之间寻找平衡——不费力，却处处考究。
+  </p>
+  <a href="#collection" class="hero__cta">
+    Explore Collection
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </a>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-text">Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</header>
+
+<!-- ============================================================
+     Essentials Collection — 三列不规则卡片网格
+     ============================================================ -->
+<section class="section collection" id="collection">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Curated Selection</p>
+    <h2 class="section__title">The <em>Essentials</em> Collection</h2>
+  </div>
+
+  <div class="collection__grid">
+
+    <!-- 单品 1：重磅真丝衬衫 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/LX65X4yGFc"
+          alt="重磅真丝衬衫 — 30姆米重磅真丝，流动的珍珠光泽"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Heavyweight Silk Shirt</h3>
+        <p class="product-card__desc">30姆米重磅真丝，流动的珍珠光泽，不费力的职场松弛感。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 单品 2：高级感阔腿裤 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/ITVAVDDSfp"
+          alt="高级感阔腿裤 — 精纺羊毛混纺，标志性挺阔线条"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Tailored Wide-Leg Trousers</h3>
+        <p class="product-card__desc">精纺羊毛混纺，标志性挺阔线条，重塑知性比例。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 单品 3：山羊绒针织衫 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/L8vSB6g1wa"
+          alt="山羊绒针织衫 — 100%阿尔巴斯山羊绒，如云朵般轻盈软糯"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Pure Cashmere Knitwear</h3>
+        <p class="product-card__desc">100%阿尔巴斯山羊绒，如云朵般轻盈软糯，贴肤的极致治愈。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Apparel Edit — 服装系列
+     ============================================================ -->
+<section class="section collection" id="apparel">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Ready-to-Wear</p>
+    <h2 class="section__title">The <em>Apparel</em> Edit</h2>
+  </div>
+
+  <div class="collection__grid">
+
+    <!-- 服装 1：法式茶歇连衣裙 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/KJPk9K6SRb"
+          alt="法式茶歇连衣裙 — 收腰A字版型，飘逸裙摆"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Wrap Midi Dress</h3>
+        <p class="product-card__desc">法式茶歇版型，收腰A字裙摆，醋酸混纺面料，行走间的优雅流动。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 服装 2：廓形西装外套 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/VG2bkNNhWf"
+          alt="廓形西装外套 — 宽松oversized版型，精纺羊毛质感"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Oversized Wool Blazer</h3>
+        <p class="product-card__desc">精纺羊毛廓形西装，松弛肩线与利落剪裁并存，通勤与休闲自如切换。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 服装 3：中长款风衣 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/3kjef9kn07"
+          alt="中长款风衣 — 垂坠感面料，经典翻领设计"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Belted Trench Coat</h3>
+        <p class="product-card__desc">高密棉感风衣面料，经典翻领与束腰设计，春秋换季的从容外搭。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Leather Atelier — 包袋系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="bags">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Leather Goods</p>
+    <h2 class="section__title">The <em>Leather</em> Atelier</h2>
+  </div>
+
+  <div class="collection__grid collection__grid--alt">
+
+    <!-- 包袋 1：真皮托特包 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/rJpC29dS5M"
+          alt="真皮托特包 — 细腻荔枝纹皮革，大容量通勤"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Structured Leather Tote</h3>
+        <p class="product-card__desc">头层荔枝纹牛皮，大容量通勤托特，挺阔包型随使用愈发柔软。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 包袋 2：腋下包法棍包 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/Ow2GzVmgzh"
+          alt="腋下包法棍包 — 光滑小牛皮，奶油白色调"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Shoulder Baguette</h3>
+        <p class="product-card__desc">光滑小牛皮腋下包，复古法棍廓形，恰到好处的肩带长度，日常出街的优雅伴侣。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 包袋 3：迷你手提包 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/QQ1kKry8gA"
+          alt="迷你手提包 — 细腻皮革纹理，精致金属链条"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Mini Top-Handle Bag</h3>
+        <p class="product-card__desc">细腻粒面皮革迷你手提包，可拆卸金属链条，晚宴与约会的点睛之选。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Shoe Atelier — 鞋履系列
+     ============================================================ -->
+<section class="section collection" id="shoes">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Footwear</p>
+    <h2 class="section__title">The <em>Shoe</em> Atelier</h2>
+  </div>
+
+  <div class="collection__grid">
+
+    <!-- 鞋履 1：真皮便士乐福鞋 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/6tYFGWJVil"
+          alt="真皮便士乐福鞋 — 焦糖棕色，细腻皮革纹理"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Leather Penny Loafers</h3>
+        <p class="product-card__desc">头层牛皮便士乐福鞋，手工缝制沿条，焦糖棕历久弥新，通勤与休闲的万能之选。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 鞋履 2：真皮芭蕾平底鞋 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/7IxUdrIifS"
+          alt="真皮芭蕾平底鞋 — 奶油白色，精致蝴蝶结装饰"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Leather Ballet Flats</h3>
+        <p class="product-card__desc">柔软小羊皮芭蕾平底鞋，手工编织蝴蝶结，可折叠鞋跟设计，随身携带的优雅与舒适。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 鞋履 3：方跟及踝短靴 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/0xKpGTrO4F"
+          alt="方跟及踝短靴 — 暖棕色真皮，简约线条"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Square-Heel Ankle Boots</h3>
+        <p class="product-card__desc">抛光小牛皮及踝短靴，5cm方正粗跟，内侧隐形拉链，秋冬季节的利落与温暖。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Accessory Edit — 配饰系列（围巾 + 墨镜）
+     ============================================================ -->
+<section class="section collection collection--oat" id="accessories">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Scarves &amp; Eyewear</p>
+    <h2 class="section__title">The <em>Accessory</em> Edit</h2>
+  </div>
+
+  <div class="collection__grid collection__grid--alt collection__grid--four">
+
+    <!-- 配饰 1：羊绒大围巾 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/Dkd3Iwi0Py"
+          alt="羊绒大围巾 — 燕麦米色调，细腻针织纹理"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Cashmere Oversized Scarf</h3>
+        <p class="product-card__desc">100%山羊绒大尺寸围巾，200cm披肩长度，细腻罗纹针织，秋冬穿搭的温暖灵魂。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 配饰 2：真丝印花丝巾 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/TjRfrloVw7"
+          alt="真丝印花丝巾 — 暖色调抽象印花，手工卷边"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Silk Print Scarf</h3>
+        <p class="product-card__desc">16姆米斜纹真丝丝巾，艺术家独家抽象印花，手工卷边，系于颈间或包柄的优雅注脚。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 配饰 3：方框墨镜 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/kSa32TpkVT"
+          alt="方框墨镜 — 深玳瑁色醋酸纤维镜框，渐变茶色镜片"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Square Acetate Sunglasses</h3>
+        <p class="product-card__desc">意大利醋酸纤维方框墨镜，深玳瑁纹理，渐变茶色UV400镜片，知性轮廓的日常加持。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 配饰 4：猫眼墨镜 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/GZkVwbLn9L"
+          alt="猫眼墨镜 — 黑色醋酸纤维镜框，复古猫眼造型"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Cat-Eye Sunglasses</h3>
+        <p class="product-card__desc">复古猫眼造型墨镜，黑色醋酸纤维镜框，金属铰链细节，上扬轮廓勾勒优雅气场。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     Fine Jewelry — 珠宝系列
+     ============================================================ -->
+<section class="section collection" id="jewelry">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Fine Jewelry</p>
+    <h2 class="section__title">Fine <em>Jewelry</em></h2>
+  </div>
+
+  <div class="collection__grid">
+
+    <!-- 珠宝 1：淡水珍珠项链 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/PZ3VZY8MBe"
+          alt="淡水珍珠项链 — 均匀圆润珍珠，金色搭扣"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Freshwater Pearl Necklace</h3>
+        <p class="product-card__desc">精选正圆强光淡水珍珠，18K金搭扣，45cm经典长度，日常与正式场合的永恒之选。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 珠宝 2：几何垂坠耳环 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/nZapFwj6AD"
+          alt="几何垂坠耳环 — 18K金，双层流线型镂空设计"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Geometric Drop Earrings</h3>
+        <p class="product-card__desc">18K金几何镂空垂坠耳环，双层流线型设计，轻盈灵动，为简约穿搭注入建筑感。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 珠宝 3：单钻细圈戒指 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/nr0epBxm56"
+          alt="单钻细圈戒指 — 18K金，镶嵌小钻石"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Solitaire Diamond Ring</h3>
+        <p class="product-card__desc">18K金细圈戒指，镶嵌0.1克拉天然钻石，包镶工艺，叠戴或单戴皆宜的低调光芒。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Timepiece Collection — 腕表系列
+     ============================================================ -->
+<section class="section collection" id="watches">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Timepieces</p>
+    <h2 class="section__title">The <em>Timepiece</em> Collection</h2>
+  </div>
+
+  <div class="collection__grid">
+
+    <!-- 腕表 1：简约圆形金表 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/VSTUqRH76y"
+          alt="简约圆形金表 — 白色表盘，棕色皮质表带"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Minimal Round Watch</h3>
+        <p class="product-card__desc">316L精钢镀金表壳，象牙白表盘，意大利牛皮表带，瑞士石英机芯，日常佩戴的经典之选。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 腕表 2：方形表盘金属链腕表 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/6VjdsbURJ8"
+          alt="方形表盘腕表 — 金色金属表链，极简表盘"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Square Dial Bracelet Watch</h3>
+        <p class="product-card__desc">复古方形表壳，香槟金表盘，五珠精钢表链，蓝宝石表镜，职场与晚宴皆宜的优雅时计。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 腕表 3：珠宝式细带腕表 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/Y8wztalqeY"
+          alt="珠宝式细带腕表 — 珍珠母贝表盘，纤细金色表链"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Pearl Dial Jewelry Watch</h3>
+        <p class="product-card__desc">珍珠母贝表盘，表圈镶嵌46颗施华洛世奇水晶，纤细镀金表链，珠宝与时计的完美融合。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Belt Edit — 腰带系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="belts">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Leather Goods</p>
+    <h2 class="section__title">The <em>Belt</em> Edit</h2>
+  </div>
+
+  <div class="collection__grid collection__grid--alt">
+
+    <!-- 腰带 1：真皮细腰带 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/A0suqnXkxq"
+          alt="真皮细腰带 — 焦糖棕色，金色针扣"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Slim Leather Belt</h3>
+        <p class="product-card__desc">意大利头层牛皮细腰带，2cm宽度，黄铜镀金针扣，焦糖棕历久弥新，勾勒腰线的精致细节。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 腰带 2：宽版腰带 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/shuYmX9IsJ"
+          alt="宽版腰带 — 黑色平滑皮革，大号金色方形扣"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Wide Statement Belt</h3>
+        <p class="product-card__desc">4cm宽版平滑小牛皮腰带，大号哑光金方形扣，黑色经典色，为连衣裙与外套注入利落轮廓。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 腰带 3：编织腰带 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/jqaZf2drff"
+          alt="编织腰带 — 深棕色真皮编织，复古金色扣"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Braided Leather Belt</h3>
+        <p class="product-card__desc">手工编织真皮腰带，深棕色渐变效果，复古黄铜扣，无需打孔自由调节，休闲穿搭的质感加分项。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Hat Atelier — 帽子系列
+     ============================================================ -->
+<section class="section collection" id="hats">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Millinery</p>
+    <h2 class="section__title">The <em>Hat</em> Atelier</h2>
+  </div>
+
+  <div class="collection__grid">
+
+    <!-- 帽子 1：羊毛费多拉礼帽 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/6LrYq8OAuL"
+          alt="羊毛费多拉礼帽 — 燕麦驼色，细腻羊毛毡质感"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Wool Felt Fedora</h3>
+        <p class="product-card__desc">100%羊毛毡费多拉礼帽，燕麦驼色，可塑形帽檐，同色系缎带装饰，秋冬造型的优雅点睛。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 帽子 2：羊毛贝雷帽 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/ojEYRxmGVh"
+          alt="羊毛贝雷帽 — 深焦糖棕色，柔软羊毛质感"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Wool Beret</h3>
+        <p class="product-card__desc">法国美利奴羊毛贝雷帽，深焦糖棕色，经典拉绒工艺，柔软贴合头型，法式优雅的日常表达。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 帽子 3：羊绒针织冷帽 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/CMTI25Ln2D"
+          alt="羊绒针织冷帽 — 燕麦米白色，细腻罗纹针织"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Cashmere Ribbed Beanie</h3>
+        <p class="product-card__desc">100%山羊绒罗纹针织冷帽，燕麦米白色，翻边设计，轻盈保暖不扎肤，冬日通勤的温柔陪伴。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     The Fragrance Collection — 香水系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="fragrance">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Fine Fragrance</p>
+    <h2 class="section__title">The <em>Fragrance</em> Collection</h2>
+  </div>
+
+  <div class="collection__grid collection__grid--alt">
+
+    <!-- 香水 1：花香调 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Bestseller</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/hUKVexaAsE"
+          alt="花香调香水 — 淡金色玻璃瓶身，玫瑰与茉莉"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Fleur de Nuit Eau de Parfum</h3>
+        <p class="product-card__desc">前调西西里柠檬，中调大马士革玫瑰与茉莉，后调白麝香与雪松，夜晚绽放的优雅花香。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 香水 2：木质调 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">New Arrival</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/spAeHqLSni"
+          alt="木质调香水 — 琥珀色瓶身，檀香与琥珀"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Velvet Woods Eau de Parfum</h3>
+        <p class="product-card__desc">前调佛手柑与粉红胡椒，中调鸢尾与肉桂，后调檀香、琥珀与香草，温暖深邃的秋冬木质香。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- 香水 3：柑橘调 -->
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap">
+        <span class="product-card__tag">Limited</span>
+        <img
+          class="product-card__image"
+          src="https://aka.doubaocdn.com/s/6RDxP1Ru5O"
+          alt="柑橘调香水 — 浅绿色瓶身，柑橘与薄荷"
+          loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <h3 class="product-card__name">Citrus Soleil Eau de Toilette</h3>
+        <p class="product-card__desc">前调阿玛菲柠檬与血橙，中调薄荷与绿茶，后调白麝香与雪松，夏日清晨的清新活力。</p>
+        <a href="#" class="product-card__discover">
+          Discover
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     Haute Couture — 高级定制系列
+     ============================================================ -->
+<section class="section collection" id="haute-couture">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Haute Couture</p>
+    <h2 class="section__title">Haute <em>Couture</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/ARtbdOvvmB" alt="深酒红丝绒抹胸晚礼服" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Velvet Evening Gown</h3><p class="product-card__desc">深酒红色丝绒抹胸晚礼服，手工收褶腰线，流动垂坠裙摆，红毯与晚宴的夺目之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/x2ajVRzqw4" alt="驼色双面羊绒浴袍大衣" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Cashmere Wrap Coat</h3><p class="product-card__desc">双面山羊绒浴袍款大衣，同色系腰带收束，无衬里手工缝制，秋冬换季的奢华包裹。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/yVQskUE94d" alt="香槟色真丝缎面吊带长裙" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Silk Slip Gown</h3><p class="product-card__desc">香槟色重磅真丝缎面吊带长裙，斜裁工艺贴合身形，流动珍珠光泽，度假与晚宴皆宜。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/sc1tFN32w2" alt="浅灰色短款皮草外套" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Cropped Fur Jacket</h3><p class="product-card__desc">浅灰色短款皮草外套，柔软蓬松触感，圆领无扣设计，为连衣裙与西装注入奢华温度。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/J7ixTOENGJ" alt="黑色修身高定西装套装" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Tailored Tuxedo Suit</h3><p class="product-card__desc">黑色羊毛修身高定西装套装，缎面戗驳领，手工纳驳头，职场与正式场合的力量感表达。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Luxury Handbags — 高端手袋系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="luxury-bags">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Luxury Handbags</p>
+    <h2 class="section__title">Luxury <em>Handbags</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--alt collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/7bpmnqOLSv" alt="黑色鳄鱼皮凯莉包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Crocodile Kelly Bag</h3><p class="product-card__desc">哑光黑色鳄鱼皮凯莉包，25cm黄金尺寸，镀金五金，手工缝制需18小时，收藏级手袋。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/VGCE49Mv0i" alt="奶白色牛皮铂金包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Birkin 30 Bag</h3><p class="product-card__desc">奶白色Togo牛皮铂金包，30cm尺寸，钯金五金，大容量通勤与旅行的终极之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/VCHx4OMZWS" alt="正红色康康包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Constance Bag</h3><p class="product-card__desc">正红色Box牛皮康康包，标志性H扣，18cm迷你尺寸，肩背与斜挎皆宜的经典。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/txnrVhfkui" alt="大象灰琳迪包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Lindy 26 Bag</h3><p class="product-card__desc">大象灰Clemence牛皮琳迪包，26cm尺寸，柔软皮质自然垂坠，通勤与日常的松弛之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/jIY1nSUr5M" alt="帆布拼皮花园包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Garden Party Tote</h3><p class="product-card__desc">自然米色帆布拼Negonda牛皮花园包，36cm大容量，轻盈耐用，周末与旅行的随性伴侣。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     High Jewelry — 高级珠宝系列
+     ============================================================ -->
+<section class="section collection" id="high-jewelry">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">High Jewelry</p>
+    <h2 class="section__title">High <em>Jewelry</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/OctdHaU61Z" alt="铂金钻石项链" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Diamond Riviera Necklace</h3><p class="product-card__desc">铂金镶嵌钻石Riviera项链，3克拉梨形主钻，密镶钻链共15克拉，晚宴与婚礼的璀璨焦点。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/aVEgkLp1id" alt="鸽血红宝石耳环" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Ruby Drop Earrings</h3><p class="product-card__desc">18K金镶嵌鸽血红宝石耳环，3克拉水滴形主石，周围密镶钻石，浓郁色彩点亮每一个造型。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/6hXZvja8A0" alt="皇家蓝蓝宝石戒指" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Sapphire Halo Ring</h3><p class="product-card__desc">铂金镶嵌皇家蓝蓝宝石戒指，4克拉椭圆形主石，镶钻光环设计，深邃蓝色的永恒承诺。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/VgRd6UOWQg" alt="南洋金珠手链" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Golden South Sea Bracelet</h3><p class="product-card__desc">南洋金色南洋珠手链，12-14mm正圆强光珍珠，18K金搭扣，温暖金色光泽映衬肤色。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/yvG92SVA97" alt="满绿翡翠吊坠" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Jadeite Pendant</h3><p class="product-card__desc">18K金镶嵌冰种满绿翡翠吊坠，正阳绿色泽，周围密镶钻石，东方韵味与现代美学的融合。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Haute Horlogerie — 高端腕表系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="haute-horlogerie">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Haute Horlogerie</p>
+    <h2 class="section__title">Haute <em>Horlogerie</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--alt collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/FCNvdv8NCr" alt="18K金镶钻腕表" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Diamond Bezel Gold Watch</h3><p class="product-card__desc">18K黄金表壳与表链，表圈镶嵌42颗明亮式切割钻石，珍珠母贝表盘，瑞士石英机芯。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/CgpgxaXm5i" alt="白色陶瓷腕表" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">White Ceramic Watch</h3><p class="product-card__desc">精密白色陶瓷表壳与表链，金色指针与表冠，简约表盘镶嵌钻石时标，轻盈耐磨的现代之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/3HqK2VB2yw" alt="隐藏式表盘珠宝腕表" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Secret Jewelry Watch</h3><p class="product-card__desc">隐藏式表盘珠宝腕表，表壳与表链满钻镶嵌，翻开式表盖露出珍珠母贝表盘，珠宝与时计的双重身份。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/iS4QP6r7O6" alt="玫瑰金陀飞轮腕表" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Rose Gold Tourbillon</h3><p class="product-card__desc">18K玫瑰金表壳，镂空表盘可见飞行陀飞轮机芯，棕色鳄鱼皮表带，机械美学与精湛工艺的巅峰。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/yO5Aifa4o6" alt="18K金方形腕表" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Square Gold Tank Watch</h3><p class="product-card__desc">18K黄金方形表壳，罗马数字表盘，编织金属表链，复古优雅的方形轮廓，日常佩戴的经典时计。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Silk & Cashmere — 丝巾与羊绒系列
+     ============================================================ -->
+<section class="section collection" id="silk-cashmere">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Silk &amp; Cashmere</p>
+    <h2 class="section__title">Silk &amp; <em>Cashmere</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/VB28W0Gedt" alt="马术印花真丝方巾" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Equestrian Silk Scarf</h3><p class="product-card__desc">90cm真丝斜纹方巾，经典马术图案印花，手工卷边，18种配色丝网印刷，系于颈间或包柄的艺术。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/JsvjCo0l2n" alt="深灰色羊绒披肩" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Cashmere Shawl</h3><p class="product-card__desc">100%山羊绒大尺寸披肩，200x100cm，深灰色细腻针织，轻盈保暖，办公室与旅途的温暖陪伴。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/6pMyhYrNBa" alt="花卉印花真丝方巾" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Floral Silk Scarf</h3><p class="product-card__desc">90cm真丝斜纹方巾，浪漫花卉印花，粉紫色调，手工卷边，春日穿搭的柔美注脚。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/S5mpdBgJvj" alt="燕麦色粗针织羊绒围巾" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Ribbed Cashmere Scarf</h3><p class="product-card__desc">100%山羊绒粗罗纹围巾，燕麦米白色，大尺寸200cm，柔软蓬松不扎肤，冬日穿搭的温暖灵魂。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/glGvoCdnJN" alt="蓝金几何真丝长巾" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Geometric Silk Stole</h3><p class="product-card__desc">双层真丝长巾，抽象几何印花，蓝金色调，180x60cm，自然垂坠，为简约造型注入艺术气息。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Luxury Footwear — 高端鞋履系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="luxury-footwear">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Luxury Footwear</p>
+    <h2 class="section__title">Luxury <em>Footwear</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--alt collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/44VrBjgEkO" alt="黑色漆皮尖头高跟鞋" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Patent Leather Pumps</h3><p class="product-card__desc">黑色漆皮尖头细高跟鞋，10cm鞋跟，真皮内衬与鞋底，手工缝制，职场与晚宴的永恒经典。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/dV7qxi8wq9" alt="棕色小牛皮及膝长靴" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Knee-High Leather Boots</h3><p class="product-card__desc">棕色小牛皮及膝长靴，5cm方跟，内侧拉链，优雅鞋型，秋冬搭配裙装与大衣的利落之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/GOZGmyU2lH" alt="金色金属乐福鞋" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Gold Horsebit Loafers</h3><p class="product-card__desc">金色金属质感乐福鞋，标志性马衔扣装饰，亮面金属皮革，平底舒适，为日常造型注入华丽光泽。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/sCmbxsHvv4" alt="银色水钻细带凉鞋" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Crystal Strappy Sandals</h3><p class="product-card__desc">银色细带水钻凉鞋，精致水钻镶嵌，8cm细高跟，真皮鞋底，晚宴与婚礼的闪耀伴侣。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/uUR3bKqH1K" alt="黑色丝绒蝴蝶结穆勒鞋" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Velvet Bow Mules</h3><p class="product-card__desc">黑色丝绒穆勒鞋，精致蝴蝶结装饰，平底设计，柔软丝绒触感，居家与外出皆宜的慵懒优雅。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Evening Accessories — 晚宴配饰系列
+     ============================================================ -->
+<section class="section collection" id="evening-accessories">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Evening Accessories</p>
+    <h2 class="section__title">Evening <em>Accessories</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/vCd6ROfhGu" alt="黑色缎面水钻手拿包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Satin Crystal Clutch</h3><p class="product-card__desc">黑色缎面手拿包，中央水钻搭扣，优雅褶皱设计，可拆卸链条肩带，晚宴造型的点睛之笔。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/ZKB1LbKMZS" alt="金色珍珠发夹" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Pearl Hair Clips</h3><p class="product-card__desc">一对金色珍珠发夹，优雅设计，中央珍珠周围密镶小钻，复古发夹造型，为盘发与散发增添精致细节。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/ws0GQsdr3n" alt="黑色真丝过肘长手套" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Silk Opera Gloves</h3><p class="product-card__desc">黑色真丝过肘长手套，16姆米真丝缎面，优雅垂坠，丝质光泽，复古晚宴与歌剧的经典配饰。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/KE5fmV3Vo0" alt="满钻迷你晚宴包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Crystal Minaudiere</h3><p class="product-card__desc">满钻迷你晚宴包，银色水钻全覆盖，硬壳结构，链条肩带，小巧精致仅容纳口红与卡，红毯级闪耀。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/O8BcW0TCjw" alt="铂金钻石花朵胸针" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Diamond Flower Brooch</h3><p class="product-card__desc">铂金钻石花朵胸针，六瓣花瓣造型，密镶钻石共2克拉，别在大衣、围巾或礼服上的永恒优雅。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Luxury Leather Goods — 高端皮具系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="luxury-leather">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Luxury Leather Goods</p>
+    <h2 class="section__title">Luxury <em>Leather</em> Goods</h2>
+  </div>
+  <div class="collection__grid collection__grid--alt collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/N1V3vkzUzx" alt="黑色鳄鱼皮腰带" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Crocodile Leather Belt</h3><p class="product-card__desc">黑色哑光鳄鱼皮腰带，3.5cm宽度，黄铜镀金针扣，细腻鳄鱼纹理，为西装与牛仔裤注入奢华细节。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/Supx4XvhP4" alt="粉色鳄鱼皮长款钱包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Crocodile Long Wallet</h3><p class="product-card__desc">樱花粉鳄鱼皮长款钱包，金色旋转扣，12卡位+3隔层，细腻鳄鱼纹理，日常携带的奢华小物。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/yJQsxV78TE" alt="老花帆布卡包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Monogram Card Holder</h3><p class="product-card__desc">经典老花帆布卡包，6卡位设计，天然牛皮饰边，轻薄小巧可放入口袋，日常通勤的实用之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/IUaYkwbphI" alt="皮革拼金属钥匙扣" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Leather Key Holder</h3><p class="product-card__desc">黑色小牛皮拼金属钥匙扣，吊饰设计，精致五金，可挂包饰或钥匙，为日常增添品牌质感。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/HEDvrzYufW" alt="小牛皮封面笔记本" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Leather Notebook</h3><p class="product-card__desc">深棕色小牛皮封面笔记本，A5尺寸，烫金logo，192页无酸纸，可替换内芯，记录灵感与日常的奢华载体。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Fragrance & Beauty — 香氛与美妆系列
+     ============================================================ -->
+<section class="section collection" id="fragrance-beauty">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Fragrance &amp; Beauty</p>
+    <h2 class="section__title">Fragrance &amp; <em>Beauty</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/Y3lcBVnoMi" alt="水晶瓶身浓香水" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Crystal Perfume Extract</h3><p class="product-card__desc">多面切割水晶瓶身浓香水，淡粉色液体，金色瓶盖，前调佛手柑、中调玫瑰与鸢尾、后调麝香与琥珀。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/XpGIO4MeUf" alt="陶瓷杯香氛蜡烛" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Ceramic Scented Candle</h3><p class="product-card__desc">米白色陶瓷杯香氛蜡烛，木质烛芯，金色盖子，雪松与琥珀香调，燃烧60小时，居家氛围的奢华营造。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/YT9j2kHn8L" alt="玫瑰身体乳" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Rose Body Lotion</h3><p class="product-card__desc">玻璃瓶玫瑰身体乳，金色泵头，大马士革玫瑰精华，丝绒质地不黏腻，持久留香，沐浴后的奢华呵护。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/DQoiZo1k4p" alt="柑橘护手霜" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Citrus Hand Cream</h3><p class="product-card__desc">铝管柑橘护手霜，金色盖子，乳木果油与维生素E，快速吸收不油腻，清新柑橘香调，随身携带的手部滋养。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/PBzgQaFx2Z" alt="手工香氛皂礼盒" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Artisan Soap Set</h3><p class="product-card__desc">手工香氛皂礼盒，三块不同香型手工皂（玫瑰、琥珀、柑橘），优雅金边包装，沐浴时的奢华仪式感。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Travel & Lifestyle — 旅行与生活系列
+     ============================================================ -->
+<section class="section collection collection--oat" id="travel-lifestyle">
+  <div class="section__header reveal">
+    <p class="section__eyebrow">Travel &amp; Lifestyle</p>
+    <h2 class="section__title">Travel &amp; <em>Lifestyle</em></h2>
+  </div>
+  <div class="collection__grid collection__grid--alt collection__grid--five">
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/5UB9vVEehf" alt="铝镁合金硬壳旅行箱" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Aluminum Luggage</h3><p class="product-card__desc">航空级铝镁合金硬壳登机箱，银色复古铆钉设计，TSA海关锁，静音万向轮，商务与旅行的坚固伴侣。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/tRmSCiOzUF" alt="印花帆布化妆包" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Floral Cosmetic Bag</h3><p class="product-card__desc">经典花卉印花帆布化妆包，棕色皮革饰边与拉链，大容量多隔层，旅行与日常收纳的优雅之选。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Limited</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/MMSFea8ydQ" alt="实木柄折叠雨伞" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Wood Handle Umbrella</h3><p class="product-card__desc">深色实木弯柄折叠雨伞，黑色高密度防水伞面，防风骨架，优雅木质手柄，雨天里的绅士与淑女风范。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">Bestseller</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/k09hkCHWGy" alt="金色飞行员墨镜" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Aviator Sunglasses</h3><p class="product-card__desc">金色金属框飞行员墨镜，渐变茶色镜片，UV400防护，复古双梁设计，为日常造型注入好莱坞式的潇洒。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+    <article class="product-card collection__card reveal">
+      <div class="product-card__image-wrap"><span class="product-card__tag">New Arrival</span><img class="product-card__image" src="https://aka.doubaocdn.com/s/tFIucloAqh" alt="深灰色羊绒冷帽" loading="lazy"></div>
+      <div class="product-card__info"><h3 class="product-card__name">Cashmere Ribbed Beanie</h3><p class="product-card__desc">深灰色100%山羊绒罗纹冷帽，翻边设计，细腻针织纹理，柔软蓬松不扎肤，冬日保暖与时尚的完美平衡。</p><a href="#" class="product-card__discover">Discover<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     Philosophy — 品牌理念
+     ============================================================ -->
+<section class="section philosophy" id="philosophy">
+  <div class="philosophy__content reveal">
+    <p class="philosophy__eyebrow">Our Philosophy</p>
+    <h2 class="philosophy__title">Quiet Luxury,<br><em>Worn Daily.</em></h2>
+    <p class="philosophy__text">
+      我们相信，真正的奢华不在于张扬的标识，而在于面料触碰肌肤时的那一份笃定。每一件 ATELIER MUZE 的作品，都源自对材质的极致苛求与对版型的反复打磨。
+    </p>
+    <p class="philosophy__text">
+      从30姆米重磅真丝的珍珠光泽，到阿尔巴斯山羊绒的云朵触感——我们为那些在忙碌中仍保持从容的女性，打造可以穿一辈子的经典。
+    </p>
+  </div>
+  <div class="philosophy__image-wrap reveal">
+    <img
+      class="philosophy__image"
+      src="https://aka.doubaocdn.com/s/ITVAVDDSfp"
+      alt="ATELIER MUZE 品牌理念 — 松弛与奢华并存"
+      loading="lazy">
+  </div>
+</section>
+
+<!-- ============================================================
+     Footer
+     ============================================================ -->
+<footer class="footer" id="footer">
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <p class="footer__brand-name">Atelier <span>Muze</span></p>
+      <p class="footer__brand-desc">
+        高智感与松弛感并存的女性高级休闲服装品牌。为每一日的从容而造。
+      </p>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__col-title">Shop</h4>
+      <ul class="footer__links">
+        <li><a href="#collection" class="footer__link">New Arrivals</a></li>
+        <li><a href="#haute-couture" class="footer__link">Haute Couture</a></li>
+        <li><a href="#luxury-bags" class="footer__link">Luxury Handbags</a></li>
+        <li><a href="#high-jewelry" class="footer__link">High Jewelry</a></li>
+        <li><a href="#haute-horlogerie" class="footer__link">Haute Horlogerie</a></li>
+        <li><a href="#silk-cashmere" class="footer__link">Silk &amp; Cashmere</a></li>
+        <li><a href="#apparel" class="footer__link">Apparel</a></li>
+        <li><a href="#shoes" class="footer__link">Shoes</a></li>
+        <li><a href="#accessories" class="footer__link">Accessories</a></li>
+        <li><a href="#fragrance" class="footer__link">Fragrance</a></li>
+        <li><a href="#travel-lifestyle" class="footer__link">Travel &amp; Lifestyle</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__col-title">Atelier</h4>
+      <ul class="footer__links">
+        <li><a href="#philosophy" class="footer__link">Our Story</a></li>
+        <li><a href="#" class="footer__link">Craftsmanship</a></li>
+        <li><a href="#" class="footer__link">Sustainability</a></li>
+        <li><a href="#" class="footer__link">Journal</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4 class="footer__col-title">Care</h4>
+      <ul class="footer__links">
+        <li><a href="#" class="footer__link">Contact Us</a></li>
+        <li><a href="#" class="footer__link">Shipping</a></li>
+        <li><a href="#" class="footer__link">Returns</a></li>
+        <li><a href="#" class="footer__link">Size Guide</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <p class="footer__copyright">&copy; 2026 ATELIER MUZE. All rights reserved.</p>
+    <div class="footer__social">
+      <a href="#" class="footer__social-link">Instagram</a>
+      <a href="#" class="footer__social-link">WeChat</a>
+      <a href="#" class="footer__social-link">Xiaohongshu</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JavaScript — 导航切换 + 滚动渐入
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ---- 移动端导航切换 ---- */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = navLinks.classList.toggle('is-open');
+      navToggle.classList.toggle('is-active', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // 点击导航链接后关闭菜单
+    var links = navLinks.querySelectorAll('.nav__link');
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('is-open');
+        navToggle.classList.remove('is-active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* ---- 滚动渐入动画（IntersectionObserver） ---- */
+  var revealElements = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(function (el) {
+      observer.observe(el);
+    });
+  } else {
+    // 降级：直接显示
+    revealElements.forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+  /* ---- 导航栏滚动时加深背景 ---- */
+  var nav = document.querySelector('.nav');
+  var lastScroll = 0;
+
+  function onScroll() {
+    var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    if (currentScroll > 40) {
+      nav.style.background = 'rgba(253, 251, 247, 0.92)';
+    } else {
+      nav.style.background = 'rgba(253, 251, 247, 0.72)';
+    }
+    lastScroll = currentScroll;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+</body>
+</html>
